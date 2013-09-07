@@ -1,33 +1,22 @@
-HEXAGON
-   |
-STRATEGIE!
-
-1) Dreieck ->...-> Hexagon
-  - (Mit der Physik spielen?)
-  - Von der Seite aus anlupfen
-
-2) Bienen->Massen->Panik->Schnee->Ausweichen
-  - Strategie
-  - 
-  
-3) Super Hexapong!
-  - Breakout!
-  - Hexagon mit variabler Anzahl an benutzbaren Kanten
-    - ITEMS (fallen aus Blöcken - gültig für eine Kante mit der man sie gesammelt hat)
-  - Vollständiges Level mit allen Blöcken -> Gewonnen -> Level leer
-  - Level -> verloren -> keine Kugel mehr da in den Spieler gefallen
-  - Level Hexagonal (mit sechs Pyramiden aus Blöcken)
+HexaPong
+  - breakout!
+  - hexagon in the middle, ball bounces off the edges
+  - items may be released from blocks to fall towards player
+  - items may deactivate edges of the player's hexagon
+  - level cleared once blocks gone
+  - lost once ball hits empty edge
+  - level hexagonal (six triangles made from blocks)
 	
-  - ERWEITERUNGEN:
-    - Level und Spieler als N-Gon
-	- Mehrere Kugeln
-	- Blöcke Items zufällig oder fest?
-	- Verschiedene Blocktypen
-		- mehrmals anschießen
-		- zufällige Prallrichtung
-		- Punkte
-		- Turret Block (schießt auf Ball)
-	- Verschiedene Balltypen (siehe oben)
-	- mehrere Bälle (vielleicht sammeln mit Items?)
-	- Combo Meter
-	- Entscheidungsmechanik (upgrades/währung)
+  - EXPANSIONS:
+    - level and player as n-gon
+	- multiple lives
+	- multiple Balls
+	- random block items or preset
+	- blocktypes
+		- hit multiple times (hp)
+		- random reflection angle
+		- score
+		- turret (shooting at ball)
+	- different balltypes
+	- combo meter
+	- decision mechanic (upgrades/currency)
