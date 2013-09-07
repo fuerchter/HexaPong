@@ -13,9 +13,10 @@ public:
 	enum EntityType
 	{
 		None,
-		Hexagon
+		Hexagon,
+		Paddle
 	};
-	Entity(shared_ptr<EntityManager> manager, EntityType type);
+	Entity(shared_ptr<EntityManager> manager, EntityType type/*, Physics physics*/);
 	virtual void update(float deltaTime)
 	{
 	
@@ -25,8 +26,9 @@ public:
 	
 	}
 protected:
-	EntityType type_;
 	shared_ptr<EntityManager> manager_;
+	EntityType type_;
+	//Physics physics_;
 private:
 	
 };
