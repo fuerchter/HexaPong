@@ -15,7 +15,7 @@ public:
 		None,
 		Hexagon
 	};
-	Entity(EntityManager &manager, EntityType type);
+	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	virtual void update(float deltaTime)
 	{
 	

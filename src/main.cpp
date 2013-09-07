@@ -8,7 +8,7 @@
 
 int main (int argc, const char * argv[])
 {	
-	EntityManager manager;
+	shared_ptr<EntityManager> manager=make_shared<EntityManager>();
 	Hexagon hexagon(manager, Entity::Hexagon);
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close);
@@ -48,13 +48,13 @@ int main (int argc, const char * argv[])
 		}
 		
 		//UPDATE SECTION
-		manager.update(deltaTime.asSeconds());
+		manager->update(deltaTime.asSeconds());
 		//UPDATE SECTION
 		
 		window.clear();
 		
 		//DRAW SECTION
-		manager.draw(window);
+		manager->draw(window);
 		//DRAW SECTION
 		
 		window.display();

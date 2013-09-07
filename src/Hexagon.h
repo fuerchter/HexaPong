@@ -9,7 +9,7 @@ using namespace std;
 class Hexagon : public Entity
 {
 public:
-	Hexagon(EntityManager &manager, EntityType type);
+	Hexagon(shared_ptr<EntityManager> manager, EntityType type);
 	virtual void update(float deltaTime) override;
 	virtual void draw(sf::RenderWindow &window) override;
 private:
