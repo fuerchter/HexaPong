@@ -17,11 +17,17 @@ STRATEGIE!
   - Vollständiges Level mit allen Blöcken -> Gewonnen -> Level leer
   - Level -> verloren -> keine Kugel mehr da in den Spieler gefallen
   - Level Hexagonal (mit sechs Pyramiden aus Blöcken)
-    - potentiell erweiterbar
+	
   - ERWEITERUNGEN:
     - Level und Spieler als N-Gon
 	- Mehrere Kugeln
 	- Blöcke Items zufällig oder fest?
-	- Verschiedene Blocktypen (mehrmals anschießen / zufällige Prallrichtung / Punkte)
+	- Verschiedene Blocktypen
+		- mehrmals anschießen
+		- zufällige Prallrichtung
+		- Punkte
+		- Turret Block (schießt auf Ball)
 	- Verschiedene Balltypen (siehe oben)
 	- mehrere Bälle (vielleicht sammeln mit Items?)
+	- Combo Meter
+	- Entscheidungsmechanik (upgrades/währung)
