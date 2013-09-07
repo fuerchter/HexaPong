@@ -3,8 +3,14 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
+#include "EntityManager.h"
+#include "Hexagon.h"
+
 int main (int argc, const char * argv[])
 {	
+	EntityManager manager;
+	Hexagon hexagon(manager, Entity::Hexagon);
+
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close);
 	
 	sf::Clock clock;
@@ -42,13 +48,13 @@ int main (int argc, const char * argv[])
 		}
 		
 		//UPDATE SECTION
-
+		manager.update(deltaTime.asSeconds());
 		//UPDATE SECTION
 		
 		window.clear();
 		
 		//DRAW SECTION
-		
+		manager.draw(window);
 		//DRAW SECTION
 		
 		window.display();
