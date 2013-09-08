@@ -2,6 +2,7 @@
 #define ENTITY
 
 #include "EntityManager.h"
+#include "Physics.h"
 
 #include "SFML/Graphics.hpp"
 
@@ -14,21 +15,18 @@ public:
 	{
 		None,
 		Hexagon,
-		Paddle
+		//Paddle
 	};
-	Entity(shared_ptr<EntityManager> manager, EntityType type/*, Physics physics*/);
+	Entity(shared_ptr<EntityManager> manager, EntityType type, Physics physics);
 	virtual void update(float deltaTime)
 	{
 	
 	}
-	virtual void draw(sf::RenderWindow &window)
-	{
-	
-	}
+	virtual void draw(sf::RenderWindow &window);
 protected:
 	shared_ptr<EntityManager> manager_;
 	EntityType type_;
-	//Physics physics_;
+	Physics physics_;
 private:
 	
 };

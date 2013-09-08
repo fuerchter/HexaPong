@@ -1,7 +1,7 @@
 #include "Paddle.h"
 
 Paddle::Paddle(shared_ptr<EntityManager> manager, EntityType type):
-Entity(manager, type)
+Entity(manager, type, Physics())
 {
 	
 }
