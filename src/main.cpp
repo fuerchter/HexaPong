@@ -5,16 +5,20 @@
 
 #include "EntityManager.h"
 #include "Hexagon.h"
+#include "Ball.h"
 
 int main (int argc, const char * argv[])
 {	
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close);
+	
 	//EntityManager is ptr because Entity needs a ptr to EntityManager (the reverse applies as well)
 	shared_ptr<EntityManager> manager=make_shared<EntityManager>();
 	
-	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager, Entity::EHexagon);
+	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager, Entity::EHexagon, window.getSize());
 	manager->push(hexagon);
 	
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close);
+	shared_ptr<Ball> ball=make_shared<Ball>(manager, Entity::EBall);
+	manager->push(ball);
 	
 	sf::Clock clock;
 	sf::Time previousTick=clock.getElapsedTime();

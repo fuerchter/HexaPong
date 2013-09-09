@@ -2,10 +2,23 @@
 
 void EntityManager::update(float deltaTime)
 {
-	for(auto entity : entities_)
+	int i=0;
+	//for(int i=0; i<entities_.size(); i++)
 	{
-		entity->update(deltaTime);
+		entities_[i]->update(deltaTime);
+		
+		Physics myPhysics=entities_[i]->getPhysics();
+		int j=1;
+		//for(int j=0; j<entities_.size(); j++)
+		{
+			if(i!=j)
+			{
+				Physics otherPhysics=entities_[j]->getPhysics();
+				cout << myPhysics.rectsOverlap(otherPhysics) << " " << myPhysics.linesOverlap(otherPhysics) << endl;
+			}
+		}
 	}
+	entities_[1]->update(deltaTime);
 }
 
 void EntityManager::draw(sf::RenderWindow &window)

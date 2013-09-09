@@ -15,14 +15,15 @@ public:
 	{
 		None,
 		EHexagon,
-		EPaddle
+		EBall
 	};
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
+	Physics getPhysics();
 	virtual void update(float deltaTime)
 	{
 	
 	}
-	void draw(sf::RenderWindow &window);
+	virtual void draw(sf::RenderWindow &window);
 protected:
 	shared_ptr<EntityManager> manager_;
 	EntityType type_;
