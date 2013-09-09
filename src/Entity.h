@@ -14,15 +14,15 @@ public:
 	enum EntityType
 	{
 		None,
-		Hexagon,
-		//Paddle
+		EHexagon,
+		EPaddle
 	};
-	Entity(shared_ptr<EntityManager> manager, EntityType type, Physics physics);
+	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	virtual void update(float deltaTime)
 	{
 	
 	}
-	virtual void draw(sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window);
 protected:
 	shared_ptr<EntityManager> manager_;
 	EntityType type_;

@@ -8,12 +8,12 @@
 
 int main (int argc, const char * argv[])
 {	
-	EntityManager manager;
-	Physics physics;
-	physics.createCircleShape(6);
+	//EntityManager is ptr because Entity needs a ptr to EntityManager (the reverse applies as well)
+	shared_ptr<EntityManager> manager=make_shared<EntityManager>();
 	
-	Hexagon hexagon(shared_ptr<EntityManager>(&manager), Entity::Hexagon, physics);
-
+	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager, Entity::EHexagon);
+	manager->push(hexagon);
+	
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close);
 	
 	sf::Clock clock;
@@ -51,13 +51,13 @@ int main (int argc, const char * argv[])
 		}
 		
 		//UPDATE SECTION
-		manager.update(deltaTime.asSeconds());
+		manager->update(deltaTime.asSeconds());
 		//UPDATE SECTION
 		
 		window.clear();
 		
 		//DRAW SECTION
-		manager.draw(window);
+		manager->draw(window);
 		//DRAW SECTION
 		
 		window.display();
