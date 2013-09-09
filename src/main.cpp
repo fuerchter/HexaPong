@@ -14,10 +14,10 @@ int main (int argc, const char * argv[])
 	//EntityManager is ptr because Entity needs a ptr to EntityManager (the reverse applies as well)
 	shared_ptr<EntityManager> manager=make_shared<EntityManager>();
 	
-	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager, Entity::EHexagon, window.getSize());
+	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager, window.getSize());
 	manager->push(hexagon);
 	
-	shared_ptr<Ball> ball=make_shared<Ball>(manager, Entity::EBall);
+	shared_ptr<Ball> ball=make_shared<Ball>(manager);
 	manager->push(ball);
 	
 	sf::Clock clock;

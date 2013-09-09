@@ -1,7 +1,7 @@
 #include "Ball.h"
 
-Ball::Ball(shared_ptr<EntityManager> manager, EntityType type):
-Entity(manager, type)
+Ball::Ball(shared_ptr<EntityManager> manager):
+Entity(manager, Entity::EBall)
 {
 	shared_ptr<sf::CircleShape> shape=make_shared<sf::CircleShape>(5);
 	sf::FloatRect bounds=shape->getLocalBounds();

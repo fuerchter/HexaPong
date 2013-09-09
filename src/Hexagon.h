@@ -10,7 +10,7 @@ using namespace std;
 class Hexagon : public Entity
 {
 public:
-	Hexagon(shared_ptr<EntityManager> manager, EntityType type, sf::Vector2u windowSize);
+	Hexagon(shared_ptr<EntityManager> manager, sf::Vector2u windowSize);
 	virtual void update(float deltaTime) override;
 private:
 };

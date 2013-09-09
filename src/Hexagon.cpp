@@ -1,7 +1,7 @@
 #include "Hexagon.h"
 
-Hexagon::Hexagon(shared_ptr<EntityManager> manager, EntityType type, sf::Vector2u windowSize):
-Entity(manager, type)
+Hexagon::Hexagon(shared_ptr<EntityManager> manager, sf::Vector2u windowSize):
+Entity(manager, Entity::EHexagon)
 {
 	//Initializing physics shape with 6 sided CircleShape
 	shared_ptr<sf::CircleShape> shape=make_shared<sf::CircleShape>(50, 6);

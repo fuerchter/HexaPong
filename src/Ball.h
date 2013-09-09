@@ -6,7 +6,7 @@
 class Ball : public Entity
 {
 public:
-	Ball(shared_ptr<EntityManager> manager, EntityType type);
+	Ball(shared_ptr<EntityManager> manager);
 	virtual void update(float deltaTime) override;
 private:
 };
