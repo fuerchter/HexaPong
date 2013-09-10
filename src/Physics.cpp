@@ -1,5 +1,15 @@
 #include "Physics.h"
 
+void Physics::setDirection(sf::Vector2f direction)
+{
+	direction_=normalize(direction);
+}
+
+void Physics::setSpeed(float speed)
+{
+	speed_=speed;
+}
+
 void Physics::setShape(shared_ptr<sf::Shape> shape)
 {
 	shape_=shape;
@@ -17,25 +27,28 @@ bool Physics::rectsOverlap(Physics physics)
 	return myRect.intersects(otherRect);
 }
 
-bool Physics::linesOverlap(Physics physics)
+sf::Vector2f Physics::rectOverlapsLines(Physics physics)
 {
-	sf::FloatRect rect=physics.getShape()->getGlobalBounds();
+	sf::FloatRect myRect=shape_->getGlobalBounds();
 	
-	//Get all lines of the current shape
-	for(int i=0; i<shape_->getPointCount(); i++)
+	int otherPointCount=physics.getShape()->getPointCount();
+	
+	//Get all lines of the other shape
+	for(int i=0; i<otherPointCount; i++)
 	{
 		//cout << "Line no: " << i << endl;
-		pair<sf::Vector2f, sf::Vector2f> line;
-		line.first=getGlobalPoint(i);
-		line.second=getGlobalPoint((i+1)%shape_->getPointCount());
+		pair<sf::Vector2f, sf::Vector2f> otherLine;
+		otherLine.first=physics.getGlobalPoint(i);
+		otherLine.second=physics.getGlobalPoint((i+1)%otherPointCount);
 		
-		if(lineOverlapsRect(line, rect))
+		//If any of them intersects with myRect save the intersected vector
+		if(lineOverlapsRect(otherLine, myRect))
 		{
-			intersectedLine_=line;
-			return true;
+			//cout << otherLine.first.x << " " << otherLine.first.y << " " << otherLine.second.x << " " << otherLine.second.y << endl;
+			return normalize(sf::Vector2f(otherLine.first.x-otherLine.second.x, otherLine.first.y-otherLine.second.y));
 		}
 	}
-	return false;
+	return sf::Vector2f();
 }
 
 sf::Vector2f Physics::getGlobalPoint(unsigned int index)
@@ -44,6 +57,21 @@ sf::Vector2f Physics::getGlobalPoint(unsigned int index)
 	sf::Transform transform=shape_->getTransform();
 	res=transform.transformPoint(res);
 	return res;
+}
+
+void Physics::reflect(sf::Vector2f other)
+{
+	//Normal has to point out of the shape?
+	sf::Vector2f normal=orthogonal(other);
+	//cout << other.x << " " << other.y << " " << normal.x << " " << normal.y << endl;
+	sf::Vector2f newDirection=direction_-2*(dot(direction_, other))*other;
+	//cout << direction_.x << " " << direction_.y << " " << other.x << " " << other.y << " " << newDirection.x << " " << newDirection.y << endl;
+	direction_=-newDirection;
+}
+
+void Physics::update(float deltaTime)
+{
+	shape_->move(direction_.x*speed_*deltaTime, direction_.y*speed_*deltaTime);
 }
 
 void Physics::draw(sf::RenderWindow &window)
@@ -138,4 +166,51 @@ bool Physics::lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatR
 	
 	return false;
 	//cout << "Right edge " << t.first << " " << t.second << endl;
+}
+
+float Physics::length(sf::Vector2f vector)
+{
+	return sqrt(vector.x*vector.x+vector.y*vector.y);
+}
+
+sf::Vector2f Physics::normalize(sf::Vector2f vector)
+{
+	float divisor=length(vector);
+	vector.x/=divisor;
+	vector.y/=divisor;
+	return vector;
+}
+
+float Physics::dot(sf::Vector2f first, sf::Vector2f second)
+{
+	return first.x*second.x+first.y*second.y;
+}
+
+sf::Vector2f Physics::orthogonal(sf::Vector2f vector)
+{
+	sf::Vector2f res;
+	if(vector.x==0 && vector.y==0)
+	{
+		
+	}
+	else
+	{
+		res.x=-vector.y;
+		res.y=vector.x;
+	}
+	/*else if(vector.x==0)
+	{
+		res.y=1;
+	}
+	else if(vector.y==0)
+	{
+		res.x=1;
+	}
+	else
+	{
+		res.x=1;
+		res.y=vector.x/-vector.y;
+		res=normalize(res);
+	}*/
+	return res;
 }

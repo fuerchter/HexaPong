@@ -19,11 +19,12 @@ public:
 	};
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	Physics getPhysics();
-	virtual void update(float deltaTime)
+	virtual void update(float deltaTime);
+	virtual void draw(sf::RenderWindow &window);
+	virtual void onCollision(sf::Vector2f lineIntersection)
 	{
 	
 	}
-	virtual void draw(sf::RenderWindow &window);
 protected:
 	shared_ptr<EntityManager> manager_;
 	EntityType type_;

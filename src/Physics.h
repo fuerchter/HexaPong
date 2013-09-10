@@ -14,13 +14,21 @@ using namespace std;
 class Physics
 {
 public:
+	void setDirection(sf::Vector2f direction);
+	void setSpeed(float speed);
 	void setShape(shared_ptr<sf::Shape> shape);
 	shared_ptr<sf::Shape> getShape();
+	
 	//Collision of my rectangle with other rectangle
 	bool rectsOverlap(Physics physics);
-	//Returns whether one of my lines collides with other rectangle, the corresponding line is saved into intersectedLine
-	bool linesOverlap(Physics physics);
+	//Returns whether my rect collides with any other line, the corresponding line is returned
+	sf::Vector2f rectOverlapsLines(Physics physics);
+	
 	sf::Vector2f getGlobalPoint(unsigned int index);
+	
+	void reflect(sf::Vector2f other);
+	
+	void update(float deltaTime);
 	void draw(sf::RenderWindow &window);
 private:
 	//Returns tLine and tEdge as pair, edge is either horizontal or vertical
@@ -28,9 +36,15 @@ private:
 	bool tCheck(pair<float, float> t);
 	bool lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect);
 	
-	sf::Vector2f velocity_;
+	//Vector functions
+	float length(sf::Vector2f vector);
+	sf::Vector2f normalize(sf::Vector2f vector);
+	float dot(sf::Vector2f first, sf::Vector2f second);
+	sf::Vector2f orthogonal(sf::Vector2f vector);
+	
+	sf::Vector2f direction_;
+	float speed_;
 	shared_ptr<sf::Shape> shape_;
-	pair<sf::Vector2f, sf::Vector2f> intersectedLine_;
 };
 
 #endif
