@@ -15,7 +15,9 @@ public:
 	{
 		None,
 		EHexagon,
-		EBall
+		EBall,
+		ELevelBorder,
+		EBlock
 	};
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	Physics getPhysics();

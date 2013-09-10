@@ -5,7 +5,6 @@ Entity(manager, Entity::EHexagon)
 {
 	//Initializing physics shape with 6 sided CircleShape
 	shared_ptr<sf::CircleShape> shape=make_shared<sf::CircleShape>(50, 6);
-	sf::FloatRect bounds=shape->getLocalBounds();
 	shape->setOrigin(shape->getRadius(), shape->getRadius());
 	shape->setPosition(windowSize.x/2, windowSize.y/2);
 	physics_.setShape(shape);

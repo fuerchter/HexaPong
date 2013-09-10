@@ -4,6 +4,8 @@
 #include "SFML/Audio.hpp"
 
 #include "EntityManager.h"
+#include "LevelBorder.h"
+#include "Block.h"
 #include "Hexagon.h"
 #include "Ball.h"
 
@@ -13,6 +15,36 @@ int main (int argc, const char * argv[])
 	
 	//EntityManager is ptr because Entity needs a ptr to EntityManager (the reverse applies as well)
 	shared_ptr<EntityManager> manager=make_shared<EntityManager>();
+	
+	shared_ptr<LevelBorder> levelBorder=make_shared<LevelBorder>(manager, window.getSize());
+	manager->push(levelBorder);
+
+	//Level construction
+	/*//The two points at the outside of the LevelBorder
+	pair<sf::Vector2f, sf::Vector2f> outerEdge(levelBorder->getPhysics().getGlobalPoint(0), levelBorder->getPhysics().getGlobalPoint(1));
+	
+	sf::Vector2f outerVector=outerEdge.second-outerEdge.first;
+	
+	//The middle of outerEdge and the middle of the screen
+	pair<sf::Vector2f, sf::Vector2f> heightEdge(sf::Vector2f(outerVector.x/2, outerVector.y/2)+outerEdge.first, sf::Vector2f(window.getSize().x/2, window.getSize().y/2));
+	
+	sf::Vector2f heightVector=heightEdge.second-heightEdge.first;
+	float heightLength=Math::length(heightVector);
+	
+	outerVector=Math::normalize(outerVector);
+	heightVector=Math::normalize(heightVector);
+	
+	float blockHeight=20;
+	float blockRowOffset=5;
+	int rowCount=heightLength/(blockHeight+blockRowOffset);
+	for(int i=1; i<=rowCount; i++)
+	{
+		sf::Vector2f currentRow=heightVector*(blockHeight+blockRowOffset)*i+heightEdge.first;
+		
+		//cout << position.x << " " << position.y << endl;
+		shared_ptr<Block> block=make_shared<Block>(manager, position, 30, sf::Vector2f(40, blockHeight));
+		manager->push(block);
+	}*/
 	
 	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager, window.getSize());
 	manager->push(hexagon);

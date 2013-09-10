@@ -1,7 +1,6 @@
 #ifndef PHYSICS
 #define PHYSICS
 
-#include <utility>
 #include <memory>
 #include <iostream>
 using namespace std;
@@ -10,6 +9,8 @@ using namespace std;
 
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
+
+#include "Math.h"
 
 class Physics
 {
@@ -30,18 +31,7 @@ public:
 	
 	void update(float deltaTime);
 	void draw(sf::RenderWindow &window);
-private:
-	//Returns tLine and tEdge as pair, edge is either horizontal or vertical
-	pair<float, float> lineIntersection(pair<sf::Vector2f, sf::Vector2f> line, pair<sf::Vector2f, sf::Vector2f> edge, bool horizontal);
-	bool tCheck(pair<float, float> t);
-	bool lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect);
-	
-	//Vector functions
-	float length(sf::Vector2f vector);
-	sf::Vector2f normalize(sf::Vector2f vector);
-	float dot(sf::Vector2f first, sf::Vector2f second);
-	sf::Vector2f orthogonal(sf::Vector2f vector);
-	
+private:	
 	sf::Vector2f direction_;
 	float speed_;
 	shared_ptr<sf::Shape> shape_;
