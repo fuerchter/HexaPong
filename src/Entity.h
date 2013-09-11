@@ -24,7 +24,7 @@ public:
 	Physics getPhysics();
 	virtual void update(float deltaTime);
 	virtual void draw(sf::RenderWindow &window);
-	virtual void onCollision(sf::Vector2f lineIntersection, bool towards, EntityType otherType) //towards obsolete in case the other object is becoming a parameter
+	virtual void onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collider)
 	{
 	
 	}

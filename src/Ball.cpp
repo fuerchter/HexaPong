@@ -30,11 +30,13 @@ void Ball::update(float deltaTime)
 	Entity::update(deltaTime);
 }
 
-void Ball::onCollision(sf::Vector2f lineIntersection, bool towards, EntityType otherType)
+void Ball::onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collider)
 {
+	bool towards = physics_.movingTowards(collider->getPhysics());
+
 	if(lineIntersection!=sf::Vector2f())
 	{
-		if((otherType==EntityType::ELevelBorder && !towards) || towards)
+		if((collider->getType()==EntityType::ELevelBorder && !towards) || towards)
 		{
 			//cout << lineIntersection.x << " " << lineIntersection.y << " " << towards << endl;
 			physics_.reflect(lineIntersection);
