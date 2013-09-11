@@ -18,7 +18,7 @@ Physics Entity::getPhysics()
 
 void Entity::update(float deltaTime)
 {
-	physics_.update(deltaTime);
+	return;
 }
 
 void Entity::draw(sf::RenderWindow &window)

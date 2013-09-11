@@ -21,6 +21,8 @@ public:
 	//remove
 private:
 	vector<shared_ptr<Entity>> entities_;
+	void updatePhysics(float deltaTime);
+	void updateEntities(float deltaTime);
 };
 
 #endif

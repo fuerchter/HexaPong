@@ -2,9 +2,16 @@
 
 void EntityManager::update(float deltaTime)
 {
+	//first calculate the physics
+	updatePhysics(deltaTime);
+	updateEntities(deltaTime);
+}
+
+void EntityManager::updatePhysics(float deltaTime)
+{
 	for(int i=0; i<entities_.size(); i++)
 	{
-		entities_[i]->update(deltaTime);
+		entities_[i]->getPhysics().update(deltaTime);
 		
 		//Check physics of current entity against physics of all the others
 		Physics myPhysics=entities_[i]->getPhysics();
@@ -21,6 +28,14 @@ void EntityManager::update(float deltaTime)
 				}
 			}
 		}
+	}
+}
+
+void EntityManager::updateEntities(float deltaTime)
+{
+	for(int i=0; i<entities_.size(); i++)
+	{
+		entities_[i]->update(deltaTime);
 	}
 }
 

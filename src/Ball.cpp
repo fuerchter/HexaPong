@@ -27,7 +27,9 @@ Entity(manager, Entity::EBall)
 
 void Ball::update(float deltaTime)
 {
-	Entity::update(deltaTime);
+	//only the things that have to be updated but don't need the physics happen here
+	//e.g. animation-stuff
+	return;
 }
 
 void Ball::onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collider)
