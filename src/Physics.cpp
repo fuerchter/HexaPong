@@ -65,7 +65,7 @@ bool Physics::movingTowards(Physics physics)
 	sf::Vector2f myToOther=Math::normalize(myPosition-otherPosition);
 	
 	//cout << direction_.x << " " << direction_.y << " " << myToOther.x << " " << myToOther.y << endl;
-	float angle=Math::toDegree(Math::angle(direction_, myToOther));
+	float angle=Math::angle(direction_, myToOther);
 	//cout << angle << endl;
 	return (angle>90 || angle<-90);
 }

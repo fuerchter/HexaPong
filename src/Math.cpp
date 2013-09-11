@@ -10,6 +10,14 @@ float Math::toRadian(float degree)
 	return degree*(PI/180);
 }
 
+pair<float, float> Math::toSlopeIntercept(sf::Vector2f direction, sf::Vector2f origin)
+{
+	//y=mx+b
+	float m=direction.x/direction.y;
+	float b=origin.y-m*origin.x;
+	return pair<float, float>(m, b);
+}
+
 float Math::length(sf::Vector2f vector)
 {
 	return sqrt(vector.x*vector.x+vector.y*vector.y);
@@ -30,7 +38,7 @@ float Math::dot(sf::Vector2f first, sf::Vector2f second)
 
 float Math::angle(sf::Vector2f first, sf::Vector2f second)
 {
-	return acos(dot(first, second));
+	return toDegree(acos(dot(first, second)));
 }
 
 sf::Vector2f Math::orthogonal(sf::Vector2f vector)
@@ -157,4 +165,12 @@ pair<float, float> Math::lineIntersection(pair<sf::Vector2f, sf::Vector2f> line,
 bool Math::tCheck(pair<float, float> t)
 {
 	return (t.first>=0 && t.first<=1 && t.second>=0 && t.second<=1);
+}
+
+sf::Vector2f Math::slopeInterceptIntersection(pair<float, float> first, pair<float, float> second)
+{
+	sf::Vector2f res;
+	res.x=(second.second-first.second)/(first.first-second.first);
+	res.y=first.first*res.x+first.second;
+	return res;
 }

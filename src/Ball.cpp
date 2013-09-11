@@ -17,7 +17,7 @@ Entity(manager, Entity::EBall)
 	physics_.setSpeed(30);
 	shape->setPosition(500, 350);*/
 	
-	physics_.setDirection(sf::Vector2f(20, 5));
+	physics_.setDirection(sf::Vector2f(20, 0));
 	physics_.setSpeed(120);
 	shape->setPosition(500, 350);
 	
@@ -34,7 +34,7 @@ void Ball::onCollision(sf::Vector2f lineIntersection, bool towards, EntityType o
 {
 	if(lineIntersection!=sf::Vector2f())
 	{
-		if(otherType==EntityType::ELevelBorder || towards)
+		if((otherType==EntityType::ELevelBorder && !towards) || towards)
 		{
 			//cout << lineIntersection.x << " " << lineIntersection.y << " " << towards << endl;
 			physics_.reflect(lineIntersection);

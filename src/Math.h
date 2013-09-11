@@ -14,6 +14,7 @@ public:
 	//General functions
 	static float toDegree(float radian);
 	static float toRadian(float degree);
+	static pair<float, float> toSlopeIntercept(sf::Vector2f direction, sf::Vector2f origin);
 	
 	//Vector functions
 	static float length(sf::Vector2f vector);
@@ -25,9 +26,13 @@ public:
 	
 	//Collision functions
 	static bool lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect);
+	//Intersection of two lines which are defined by two points each
 	static pair<float, float> lineIntersection(pair<sf::Vector2f, sf::Vector2f> line, pair<sf::Vector2f, sf::Vector2f> edge, bool horizontal);
-	static bool tCheck(pair<float, float> t);
+	//Intersection of two lines in slopeIntercept notation
+	static sf::Vector2f slopeInterceptIntersection(pair<float, float> first, pair<float, float> second);
 private:
+	static bool tCheck(pair<float, float> t);
+
 	static constexpr float PI=4.0*atan(1.0);
 };
 
