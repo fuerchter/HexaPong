@@ -16,7 +16,13 @@ void EntityManager::update(float deltaTime)
 				//Only if the rectangles overlap also compute a line/rect intersection
 				if(myPhysics.rectsOverlap(otherPhysics))
 				{
-					entities_[i]->onCollision(myPhysics.rectOverlapsLines(otherPhysics));
+					sf::Vector2f lineIntersection=myPhysics.rectOverlapsLines(otherPhysics);
+					bool towards=true;
+					if(lineIntersection!=sf::Vector2f())
+					{
+						towards=myPhysics.movingTowards(otherPhysics);
+					}
+					entities_[i]->onCollision(lineIntersection, towards, entities_[j]->getType());
 				}
 			}
 		}

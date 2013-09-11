@@ -20,14 +20,15 @@ public:
 	void setShape(shared_ptr<sf::Shape> shape);
 	shared_ptr<sf::Shape> getShape();
 	
-	//Collision of my rectangle with other rectangle
+	//Collision functions
+	//my rectangle/other rectangle
 	bool rectsOverlap(Physics physics);
-	//Returns whether my rect collides with any other line, the corresponding line is returned
+	//my rectangle/any other line (corresponding line is returned)
 	sf::Vector2f rectOverlapsLines(Physics physics);
+	void reflect(sf::Vector2f other);
+	bool movingTowards(Physics physics);
 	
 	sf::Vector2f getGlobalPoint(unsigned int index);
-	
-	void reflect(sf::Vector2f other);
 	
 	void update(float deltaTime);
 	void draw(sf::RenderWindow &window);

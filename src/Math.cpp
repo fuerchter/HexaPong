@@ -1,5 +1,15 @@
 #include "Math.h"
 
+float Math::toDegree(float radian)
+{
+	return radian*(180/PI);
+}
+
+float Math::toRadian(float degree)
+{
+	return degree*(PI/180);
+}
+
 float Math::length(sf::Vector2f vector)
 {
 	return sqrt(vector.x*vector.x+vector.y*vector.y);
@@ -16,6 +26,11 @@ sf::Vector2f Math::normalize(sf::Vector2f vector)
 float Math::dot(sf::Vector2f first, sf::Vector2f second)
 {
 	return first.x*second.x+first.y*second.y;
+}
+
+float Math::angle(sf::Vector2f first, sf::Vector2f second)
+{
+	return acos(dot(first, second));
 }
 
 sf::Vector2f Math::orthogonal(sf::Vector2f vector)
@@ -49,7 +64,7 @@ sf::Vector2f Math::orthogonal(sf::Vector2f vector)
 
 sf::Vector2f Math::reflect(sf::Vector2f first, sf::Vector2f second)
 {
-	//Normal has to point out of the shape?
+	//Not useful in case both first and second are parallel
 	sf::Vector2f normal=orthogonal(second);
 	//cout << second.x << " " << second.y << " " << normal.x << " " << normal.y << endl;
 	sf::Vector2f res=-(first-2*(dot(first, second))*second);

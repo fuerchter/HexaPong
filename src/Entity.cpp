@@ -6,6 +6,11 @@ Entity::Entity(shared_ptr<EntityManager> manager, EntityType type)
 	type_=type;
 }
 
+Entity::EntityType Entity::getType()
+{
+	return type_;
+}
+
 Physics Entity::getPhysics()
 {
 	return physics_;

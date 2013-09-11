@@ -20,10 +20,11 @@ public:
 		EBlock
 	};
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
+	EntityType getType();
 	Physics getPhysics();
 	virtual void update(float deltaTime);
 	virtual void draw(sf::RenderWindow &window);
-	virtual void onCollision(sf::Vector2f lineIntersection)
+	virtual void onCollision(sf::Vector2f lineIntersection, bool towards, EntityType otherType) //towards obsolete in case the other object is becoming a parameter
 	{
 	
 	}

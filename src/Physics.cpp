@@ -51,17 +51,31 @@ sf::Vector2f Physics::rectOverlapsLines(Physics physics)
 	return sf::Vector2f();
 }
 
+void Physics::reflect(sf::Vector2f other)
+{
+	direction_=Math::reflect(direction_, other);
+}
+
+bool Physics::movingTowards(Physics physics)
+{
+	sf::Vector2f myPosition=shape_->getPosition();
+	sf::Vector2f otherPosition=physics.getShape()->getPosition();
+	
+	//Vector from my midPoint to the other physics object's midPoint
+	sf::Vector2f myToOther=Math::normalize(myPosition-otherPosition);
+	
+	//cout << direction_.x << " " << direction_.y << " " << myToOther.x << " " << myToOther.y << endl;
+	float angle=Math::toDegree(Math::angle(direction_, myToOther));
+	//cout << angle << endl;
+	return (angle>90 || angle<-90);
+}
+
 sf::Vector2f Physics::getGlobalPoint(unsigned int index)
 {
 	sf::Vector2f res=shape_->getPoint(index);
 	sf::Transform transform=shape_->getTransform();
 	res=transform.transformPoint(res);
 	return res;
-}
-
-void Physics::reflect(sf::Vector2f other)
-{
-	direction_=Math::reflect(direction_, other);
 }
 
 void Physics::update(float deltaTime)

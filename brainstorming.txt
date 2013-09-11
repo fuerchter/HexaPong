@@ -12,9 +12,12 @@ HexaPong
 	- multiple lives
 	- multiple Balls
 	- random block items or preset
+	- paddletypes
+		- slower/faster
+		- flow area (to avoid moving in a circle, shatter)
 	- blocktypes
 		- hit multiple times (hp)
-		- random reflection angle
+		- random reflection angle (or reflect towards middle)
 		- score
 		- turret (shooting at ball)
 	- different balltypes
