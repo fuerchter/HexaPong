@@ -19,7 +19,7 @@ void Level::placeBlocks(sf::Vector2u windowSize, sf::Vector2f blockSize, sf::Vec
 {
 	int blockCount=0;
 	Physics borderPhysics=levelBorder->getPhysics();
-	for(int point=0; point<borderPhysics.getShape()->getPointCount(); point++)
+	for(unsigned int point=0; point<borderPhysics.getShape()->getPointCount(); point++)
 	{
 		//The two points at the outside of the LevelBorder
 		pair<sf::Vector2f, sf::Vector2f> colEdge(borderPhysics.getGlobalPoint(point), borderPhysics.getGlobalPoint((point+1)%borderPhysics.getShape()->getPointCount()));
@@ -73,7 +73,7 @@ void Level::placeBlocks(sf::Vector2u windowSize, sf::Vector2f blockSize, sf::Vec
 			}
 		}
 	}
-	cout << blockCount << endl;
+	//cout << blockCount << endl;
 }
 
 void Level::update(float deltaTime)

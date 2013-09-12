@@ -1,6 +1,7 @@
 #ifndef ENTITYMANAGER
 #define ENTITYMANAGER
 
+#include <algorithm>
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -18,11 +19,14 @@ public:
 	void update(float deltaTime);
 	void draw(sf::RenderWindow &window);
 	void push(shared_ptr<Entity> entity);
-	//remove
+	void remove(shared_ptr<Entity> entity);
 private:
-	vector<shared_ptr<Entity>> entities_;
 	void updatePhysics(float deltaTime);
 	void updateEntities(float deltaTime);
+	void removeEntities();
+	
+	vector<shared_ptr<Entity>> entities_;
+	vector<vector<shared_ptr<Entity>>::iterator> marked_;
 };
 
 #endif

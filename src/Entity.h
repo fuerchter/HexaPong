@@ -22,7 +22,10 @@ public:
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	EntityType getType();
 	Physics getPhysics();
-	virtual void update(float deltaTime);
+	virtual void update(float deltaTime)
+	{
+	
+	}
 	virtual void draw(sf::RenderWindow &window);
 	virtual void onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collider)
 	{

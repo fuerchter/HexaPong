@@ -42,7 +42,8 @@ sf::Vector2f Physics::rectOverlapsLines(Physics physics)
 		otherLine.second=physics.getGlobalPoint((i+1)%otherPointCount);
 		
 		//If any of them intersects with myRect save the intersected vector
-		if(Math::lineOverlapsRect(otherLine, myRect))
+		sf::Vector2f intersectionPoint;
+		if(Math::lineOverlapsRect(otherLine, myRect, intersectionPoint))
 		{
 			//cout << otherLine.first.x << " " << otherLine.first.y << " " << otherLine.second.x << " " << otherLine.second.y << endl;
 			return Math::normalize(otherLine.first-otherLine.second);

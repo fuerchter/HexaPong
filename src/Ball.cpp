@@ -5,7 +5,6 @@ Entity(manager, Entity::EBall)
 {	
 
 	shared_ptr<sf::CircleShape> shape=make_shared<sf::CircleShape>(5);
-	sf::FloatRect bounds=shape->getLocalBounds();
 	shape->setOrigin(shape->getRadius(), shape->getRadius());
 	
 	//Endless
@@ -13,9 +12,9 @@ Entity(manager, Entity::EBall)
 	physics_.setSpeed(120);
 	shape->setPosition(500, 200);*/
 	//Corner Glitch
-	/*physics_.setDirection(sf::Vector2f(20, 5));
+	/*physics_.setDirection(sf::Vector2f(-20, 10));
 	physics_.setSpeed(30);
-	shape->setPosition(500, 350);*/
+	shape->setPosition(500, 340);*/
 	
 	physics_.setDirection(sf::Vector2f(20, 0));
 	physics_.setSpeed(120);
@@ -29,19 +28,23 @@ void Ball::update(float deltaTime)
 {
 	//only the things that have to be updated but don't need the physics happen here
 	//e.g. animation-stuff
-	return;
 }
 
 void Ball::onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collider)
 {
 	bool towards = physics_.movingTowards(collider->getPhysics());
-
+	
 	if(lineIntersection!=sf::Vector2f())
 	{
 		if((collider->getType()==EntityType::ELevelBorder && !towards) || towards)
 		{
 			//cout << lineIntersection.x << " " << lineIntersection.y << " " << towards << endl;
 			physics_.reflect(lineIntersection);
+			if(collider->getType()==EntityType::EBlock)
+			{
+				//Will not be able to release item though
+				manager_->remove(collider);
+			}
 		}
 	}
 }

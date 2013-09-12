@@ -5,17 +5,20 @@ void EntityManager::update(float deltaTime)
 	//first calculate the physics
 	updatePhysics(deltaTime);
 	updateEntities(deltaTime);
+	removeEntities();
 }
 
 void EntityManager::updatePhysics(float deltaTime)
 {
-	for(int i=0; i<entities_.size(); i++)
+	//if entity i removes another entity it will cause a crash. also should it call both i and j's onCollision once a collision was found?
+	for(unsigned int i=0; i<entities_.size(); i++)
 	{
+		//cout << i << " " << entities_.size() << endl;
 		entities_[i]->getPhysics().update(deltaTime);
 		
 		//Check physics of current entity against physics of all the others
 		Physics myPhysics=entities_[i]->getPhysics();
-		for(int j=0; j<entities_.size(); j++)
+		for(unsigned int j=0; j<entities_.size(); j++)
 		{
 			if(i!=j)
 			{
@@ -23,8 +26,9 @@ void EntityManager::updatePhysics(float deltaTime)
 				//Only if the rectangles overlap also compute a line/rect intersection
 				if(myPhysics.rectsOverlap(otherPhysics))
 				{
-					sf::Vector2f lineIntersection=myPhysics.rectOverlapsLines(otherPhysics);
-					entities_[i]->onCollision(lineIntersection, entities_[j]);
+					sf::Vector2f myIntersection=myPhysics.rectOverlapsLines(otherPhysics);
+					entities_[i]->onCollision(myIntersection, entities_[j]);
+					//cout << i << " colliding with " << j << endl;
 				}
 			}
 		}
@@ -33,10 +37,19 @@ void EntityManager::updatePhysics(float deltaTime)
 
 void EntityManager::updateEntities(float deltaTime)
 {
-	for(int i=0; i<entities_.size(); i++)
+	for(auto entity : entities_)
 	{
-		entities_[i]->update(deltaTime);
+		entity->update(deltaTime);
 	}
+}
+
+void EntityManager::removeEntities()
+{
+	for(auto entity : marked_)
+	{
+		entities_.erase(entity);
+	}
+	marked_.clear();
 }
 
 void EntityManager::draw(sf::RenderWindow &window)
@@ -50,4 +63,14 @@ void EntityManager::draw(sf::RenderWindow &window)
 void EntityManager::push(shared_ptr<Entity> entity)
 {
 	entities_.push_back(entity);
+}
+
+void EntityManager::remove(shared_ptr<Entity> entity)
+{
+	//Might want to put find into its own function
+	auto it=find(entities_.begin(), entities_.end(), entity);
+	if(it!=entities_.end())
+	{
+		marked_.push_back(it);
+	}
 }

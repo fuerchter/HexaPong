@@ -75,12 +75,12 @@ sf::Vector2f Math::reflect(sf::Vector2f first, sf::Vector2f second)
 	//Not useful in case both first and second are parallel
 	sf::Vector2f normal=orthogonal(second);
 	//cout << second.x << " " << second.y << " " << normal.x << " " << normal.y << endl;
-	sf::Vector2f res=-(first-2*(dot(first, second))*second);
+	sf::Vector2f res=(first-2*(dot(first, normal))*normal);
 	//cout << first.x << " " << first.y << " " << second.x << " " << second.y << " " << res.x << " " << res.y << endl;
 	return res;
 }
 
-bool Math::lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect)
+bool Math::lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect, sf::Vector2f &intersectionPoint)
 {
 	pair<sf::Vector2f, sf::Vector2f> edge;
 	pair<float, float> t;

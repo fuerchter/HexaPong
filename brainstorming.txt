@@ -24,3 +24,7 @@ HexaPong
 	- combo meter
 	- decision mechanic (upgrades/currency)
 	- make levelBorder reflect towards middle
+	
+	- POLISH:
+		- music/sound
+		- menu (hexa font?)

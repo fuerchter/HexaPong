@@ -25,7 +25,7 @@ public:
 	static sf::Vector2f reflect(sf::Vector2f first, sf::Vector2f second);
 	
 	//Collision functions
-	static bool lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect);
+	static bool lineOverlapsRect(pair<sf::Vector2f, sf::Vector2f> line, sf::FloatRect rect, sf::Vector2f &intersectionPoint);
 	//Intersection of two lines which are defined by two points each
 	static pair<float, float> lineIntersection(pair<sf::Vector2f, sf::Vector2f> line, pair<sf::Vector2f, sf::Vector2f> edge, bool horizontal);
 	//Intersection of two lines in slopeIntercept notation
