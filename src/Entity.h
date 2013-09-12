@@ -17,7 +17,8 @@ public:
 		EHexagon,
 		EBall,
 		ELevelBorder,
-		EBlock
+		EBlock,
+		EPaddle
 	};
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	EntityType getType();

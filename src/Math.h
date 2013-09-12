@@ -15,6 +15,7 @@ public:
 	static float toDegree(float radian);
 	static float toRadian(float degree);
 	static pair<float, float> toSlopeIntercept(sf::Vector2f direction, sf::Vector2f origin);
+	static float pi();
 	
 	//Vector functions
 	static float length(sf::Vector2f vector);
@@ -32,8 +33,6 @@ public:
 	static sf::Vector2f slopeInterceptIntersection(pair<float, float> first, pair<float, float> second);
 private:
 	static bool tCheck(pair<float, float> t);
-
-	static constexpr float PI=4.0*atan(1.0);
 };
 
 #endif

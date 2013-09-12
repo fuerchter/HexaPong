@@ -2,12 +2,17 @@
 
 float Math::toDegree(float radian)
 {
-	return radian*(180/PI);
+	return radian*(180/pi());
 }
 
 float Math::toRadian(float degree)
 {
-	return degree*(PI/180);
+	return degree*(pi()/180);
+}
+
+float Math::pi()
+{
+	return 4.0*atan(1.0);
 }
 
 pair<float, float> Math::toSlopeIntercept(sf::Vector2f direction, sf::Vector2f origin)

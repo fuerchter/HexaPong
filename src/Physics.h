@@ -17,6 +17,7 @@ class Physics
 public:
 	void setDirection(sf::Vector2f direction);
 	void setSpeed(float speed);
+	//Has to be called on construction
 	void setShape(shared_ptr<sf::Shape> shape);
 	shared_ptr<sf::Shape> getShape();
 	
