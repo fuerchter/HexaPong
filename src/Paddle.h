@@ -12,9 +12,11 @@ using namespace std;
 class Paddle : public Entity
 {
 public:
-	Paddle(shared_ptr<EntityManager> manager, pair<sf::Vector2f, sf::Vector2f> outerEdge, sf::Vector2f midScreen, float length);
+	Paddle(shared_ptr<EntityManager> manager, int index, pair<sf::Vector2f, sf::Vector2f> outerEdge, sf::Vector2f midScreen, float length);
 	void rotate(float angle);
+	int getIndex();
 private:
+	int index_;
 };
 
 #endif

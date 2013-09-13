@@ -22,6 +22,7 @@ public:
 	static sf::Vector2f normalize(sf::Vector2f vector);
 	static float dot(sf::Vector2f first, sf::Vector2f second);
 	static float angle(sf::Vector2f first, sf::Vector2f second);
+	static sf::Vector2f rotate(sf::Vector2f vector, float angle);
 	static sf::Vector2f orthogonal(sf::Vector2f vector);
 	static sf::Vector2f reflect(sf::Vector2f first, sf::Vector2f second);
 	

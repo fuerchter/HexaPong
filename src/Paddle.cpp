@@ -1,7 +1,7 @@
 #include "Paddle.h"
 
-Paddle::Paddle(shared_ptr<EntityManager> manager, pair<sf::Vector2f, sf::Vector2f> outerEdge, sf::Vector2f midScreen, float length):
-Entity(manager, EntityType::EPaddle)
+Paddle::Paddle(shared_ptr<EntityManager> manager, int index, pair<sf::Vector2f, sf::Vector2f> outerEdge, sf::Vector2f midScreen, float length):
+Entity(manager, EntityType::EPaddle), index_(index)
 {
 	shared_ptr<sf::ConvexShape> shape=make_shared<sf::ConvexShape>(3);
 	shape->setPoint(0, midScreen);
@@ -18,4 +18,9 @@ Entity(manager, EntityType::EPaddle)
 void Paddle::rotate(float angle)
 {
 	physics_.getShape()->rotate(angle);
+}
+
+int Paddle::getIndex()
+{
+	return index_;
 }

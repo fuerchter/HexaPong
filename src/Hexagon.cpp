@@ -23,11 +23,11 @@ void Hexagon::update(float deltaTime)
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		rotate(-50*deltaTime);
+		rotate(-75*deltaTime);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		rotate(50*deltaTime);
+		rotate(75*deltaTime);
 	}
 }
 
@@ -50,9 +50,10 @@ void Hexagon::insertPaddle(int index)
 	if(!paddles_[index])
 	{
 		pair<sf::Vector2f, sf::Vector2f> outerEdge(physics_.getGlobalPoint(index), physics_.getGlobalPoint((index+1)%pointCount));
-		shared_ptr<Paddle> paddle=make_shared<Paddle>(manager_, outerEdge, sf::Vector2f(windowSize.x/2.0, windowSize.y/2.0), 10);
+		shared_ptr<Paddle> paddle=make_shared<Paddle>(manager_, index, outerEdge, sf::Vector2f(windowSize.x/2.0, windowSize.y/2.0), 10);
 		paddles_.insert(paddles_.begin()+index, paddle);
 		manager_->push(paddle);
+		cout << "My id: " << id_ << " paddle id: " << paddles_[index]->getId() << endl;
 	}
 }
 

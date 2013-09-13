@@ -46,6 +46,15 @@ float Math::angle(sf::Vector2f first, sf::Vector2f second)
 	return toDegree(acos(dot(first, second)));
 }
 
+sf::Vector2f Math::rotate(sf::Vector2f vector, float angle)
+{
+	angle=toRadian(angle);
+	sf::Vector2f res;
+	res.x=vector.x*cos(angle)+vector.y*-sin(angle);
+	res.y=vector.x*sin(angle)+vector.y*cos(angle);
+	return res;
+}
+
 sf::Vector2f Math::orthogonal(sf::Vector2f vector)
 {
 	sf::Vector2f res;

@@ -18,7 +18,7 @@ Entity(manager, EntityType::EBall)
 	
 	physics_.setDirection(sf::Vector2f(20, 0));
 	physics_.setSpeed(120);
-	shape->setPosition(500, 350);
+	shape->setPosition(500, 360);
 	shape->setFillColor(sf::Color(255, 109, 37));
 	//shape->setFillColor(sf::Color::Black);
 	physics_.setShape(shape);

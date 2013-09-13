@@ -3,7 +3,7 @@
 Item::Item(shared_ptr<EntityManager> manager, ItemType type, sf::Vector2f position, sf::Vector2f direction):
 Entity(manager, EntityType::EItem), type_(type)
 {
-	shared_ptr<sf::RectangleShape> shape=make_shared<sf::RectangleShape>(sf::Vector2f(20, 20));
+	shared_ptr<sf::RectangleShape> shape=make_shared<sf::RectangleShape>(sf::Vector2f(15, 15));
 	sf::FloatRect bounds=shape->getLocalBounds();
 	shape->setOrigin(bounds.width/2, bounds.height/2);
 	shape->setPosition(position);
@@ -58,8 +58,8 @@ void Item::onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collide
 					{
 						//Remove the paddle we hit
 						shared_ptr<Hexagon> hexagon=static_pointer_cast<Hexagon>(manager_->getEntities(EntityType::EHexagon)[0]);
-						int paddleIndex=hexagon->getPhysics().getPointFromVector(lineIntersection);
-						hexagon->removePaddle(paddleIndex);
+						shared_ptr<Paddle> paddle=static_pointer_cast<Paddle>(collider);
+						hexagon->removePaddle(paddle->getIndex());
 						break;
 					}
 					default:

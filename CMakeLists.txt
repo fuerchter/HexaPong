@@ -6,6 +6,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 
+find_package(RAPIDXML REQUIRED)
+
+if(RAPIDXML_FOUND)
+	include_directories(${RAPIDXML_INCLUDE_DIRS})
+endif()
+
 find_package(SFML REQUIRED COMPONENTS system window graphics audio)
 
 if(SFML_FOUND)
@@ -25,5 +31,5 @@ endforeach(FOLDER)
 add_executable(HexaPong ${EXECUTABLES})
 target_link_libraries(HexaPong ${LIBRARIES})
 
-#install(TARGETS HexaPong DESTINATION ${CMAKE_INSTALL_PREFIX})
-#install(DIRECTORY "assets" DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(TARGETS HexaPong DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY "assets" DESTINATION ${CMAKE_INSTALL_PREFIX})

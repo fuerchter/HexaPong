@@ -1,0 +1,9 @@
+<level>
+	<!-- need to be separated somehow or else there can only be 9 types -->
+	<triangle blocks="00000000000000000000021212" />
+	<triangle blocks="00000000000000000000021212" />
+	<triangle blocks="00000000000000000000021212" />
+	<triangle blocks="00000000000000000000021212" />
+	<triangle blocks="00000000000000000000021212" />
+	<triangle blocks="00000000000000000000021212" />
+</level>

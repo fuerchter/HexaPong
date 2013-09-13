@@ -8,7 +8,19 @@ Entity(manager, EntityType::EBlock)
 	shape->setOrigin(bounds.width/2, bounds.height/2);
 	shape->setPosition(position);
 	shape->setRotation(rotation);
-	shape->setFillColor(sf::Color(37, 165, 255));
+	switch(item)
+	{
+		case ItemType::IEnable:
+			shape->setFillColor(sf::Color::Green);
+			break;
+		case ItemType::IDisable:
+			shape->setFillColor(sf::Color::Red);
+			break;
+		default:
+			shape->setFillColor(sf::Color(37, 165, 255));
+			break;
+	}
+	
 	physics_.setShape(shape);
 	
 	item_=item;
