@@ -3,10 +3,16 @@
 Entity::Entity(shared_ptr<EntityManager> manager, EntityType type)
 {
 	manager_=manager;
+	id_=manager_->size();
 	type_=type;
 }
 
-Entity::EntityType Entity::getType()
+int Entity::getId()
+{
+	return id_;
+}
+
+EntityType Entity::getType()
 {
 	return type_;
 }

@@ -6,7 +6,7 @@
 class LevelBorder : public Entity
 {
 public:
-	LevelBorder(shared_ptr<EntityManager> manager, sf::Vector2u windowSize);
+	LevelBorder(shared_ptr<EntityManager> manager);
 private:
 };
 

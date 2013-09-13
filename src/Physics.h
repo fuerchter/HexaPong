@@ -30,6 +30,7 @@ public:
 	bool movingTowards(Physics physics);
 	
 	sf::Vector2f getGlobalPoint(unsigned int index);
+	int getPointFromVector(sf::Vector2f vector);
 	
 	void update(float deltaTime);
 	void draw(sf::RenderWindow &window);

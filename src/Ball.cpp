@@ -1,7 +1,7 @@
 #include "Ball.h"
 
 Ball::Ball(shared_ptr<EntityManager> manager):
-Entity(manager, Entity::EBall)
+Entity(manager, EntityType::EBall)
 {	
 
 	shared_ptr<sf::CircleShape> shape=make_shared<sf::CircleShape>(5);
@@ -19,8 +19,8 @@ Entity(manager, Entity::EBall)
 	physics_.setDirection(sf::Vector2f(20, 0));
 	physics_.setSpeed(120);
 	shape->setPosition(500, 350);
-	
-	shape->setFillColor(sf::Color::Red);
+	shape->setFillColor(sf::Color(255, 109, 37));
+	//shape->setFillColor(sf::Color::Black);
 	physics_.setShape(shape);
 }
 
@@ -36,14 +36,42 @@ void Ball::onCollision(sf::Vector2f lineIntersection, shared_ptr<Entity> collide
 	
 	if(lineIntersection!=sf::Vector2f())
 	{
-		if((collider->getType()==EntityType::ELevelBorder && !towards) || towards)
+		switch(collider->getType())
 		{
-			//cout << lineIntersection.x << " " << lineIntersection.y << " " << towards << endl;
-			physics_.reflect(lineIntersection);
-			if(collider->getType()==EntityType::EBlock)
+			case EntityType::EHexagon:
 			{
-				//Will not be able to release item though
-				manager_->remove(collider);
+				manager_->setDone(true);
+				break;
+			}
+			case EntityType::ELevelBorder:
+			{
+				//LevelBorder will reflect it towards the Hexagon
+				sf::Vector2f ownPosition=physics_.getShape()->getPosition();
+				sf::Vector2f midScreen(manager_->getWindowSize().x/2.0, manager_->getWindowSize().y/2.0);
+				physics_.setDirection(midScreen-ownPosition);
+				break;
+			}
+			case EntityType::EBlock:
+			{
+				if(towards)
+				{
+					physics_.reflect(lineIntersection);
+				}
+				static_pointer_cast<Block>(collider)->remove();
+				manager_->remove(collider->getId());
+				break;
+			}
+			case EntityType::EItem:
+			{
+				break;
+			}
+			default:
+			{
+				if(towards)
+				{
+					physics_.reflect(lineIntersection);
+				}
+				break;
 			}
 		}
 	}

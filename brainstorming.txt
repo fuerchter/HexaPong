@@ -26,5 +26,5 @@ HexaPong
 	- make levelBorder reflect towards middle
 	
 	- POLISH:
-		- music/sound
+		- music/sound (sound for each shape the ball hits, 8-bit/electro music?)
 		- menu (hexa font?)

@@ -7,7 +7,9 @@
 
 int main (int argc, const char * argv[])
 {	
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close);
+	sf::ContextSettings settings;
+	//settings.antialiasingLevel=4;
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close, settings);
 	
 	Level level(window.getSize(), sf::Vector2f(20, 10), sf::Vector2f(25, 25));
 	

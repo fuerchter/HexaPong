@@ -1,14 +1,16 @@
 #include "Level.h"
 
 Level::Level(sf::Vector2u windowSize, sf::Vector2f blockSize, sf::Vector2f blockOffset):
-manager_(make_shared<EntityManager>())
+manager_(make_shared<EntityManager>(windowSize))
 {
-	shared_ptr<LevelBorder> levelBorder=make_shared<LevelBorder>(manager_, windowSize);
+	shared_ptr<LevelBorder> levelBorder=make_shared<LevelBorder>(manager_);
 	manager_->push(levelBorder);
 	
-	placeBlocks(windowSize, blockSize, blockOffset, levelBorder);
+	//placeBlocks(windowSize, blockSize, blockOffset, levelBorder);
+	shared_ptr<Block> block=make_shared<Block>(manager_, sf::Vector2f(400, 350), 90, sf::Vector2f(20, 10), ItemType::IEnable);
+	manager_->push(block);
 	
-	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager_, windowSize);
+	shared_ptr<Hexagon> hexagon=make_shared<Hexagon>(manager_);
 	manager_->push(hexagon);
 	
 	shared_ptr<Ball> ball=make_shared<Ball>(manager_);
@@ -78,9 +80,27 @@ void Level::placeBlocks(sf::Vector2u windowSize, sf::Vector2f blockSize, sf::Vec
 
 void Level::update(float deltaTime)
 {
-	manager_->update(deltaTime);
+	if(manager_)
+	{
+		manager_->update(deltaTime);
+		if(manager_->getEntities(EntityType::EBlock).empty())
+		{
+			//cout << "You Win" << endl;
+		}
+		if(manager_->getDone())
+		{
+			manager_.reset();
+		}
+	}
+	else
+	{
+		//cout << "Game Over" << endl;
+	}
 }
 void Level::draw(sf::RenderWindow &window)
 {
-	manager_->draw(window);
+	if(manager_)
+	{
+		manager_->draw(window);
+	}
 }

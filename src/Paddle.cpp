@@ -1,7 +1,7 @@
 #include "Paddle.h"
 
 Paddle::Paddle(shared_ptr<EntityManager> manager, pair<sf::Vector2f, sf::Vector2f> outerEdge, sf::Vector2f midScreen, float length):
-Entity(manager, Entity::EPaddle)
+Entity(manager, EntityType::EPaddle)
 {
 	shared_ptr<sf::ConvexShape> shape=make_shared<sf::ConvexShape>(3);
 	shape->setPoint(0, midScreen);
@@ -11,7 +11,7 @@ Entity(manager, Entity::EPaddle)
 	shape->setPoint(2, outerEdge.second+secondToMid*length);
 	shape->setOrigin(midScreen);
 	shape->setPosition(midScreen);
-	shape->setFillColor(sf::Color::Blue);
+	shape->setFillColor(sf::Color(37, 165, 255));
 	physics_.setShape(shape);
 }
 

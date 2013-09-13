@@ -79,6 +79,19 @@ sf::Vector2f Physics::getGlobalPoint(unsigned int index)
 	return res;
 }
 
+int Physics::getPointFromVector(sf::Vector2f vector)
+{
+	for(unsigned int i=0; i<shape_->getPointCount(); i++)
+	{
+		sf::Vector2f comp=Math::normalize(getGlobalPoint(i)-getGlobalPoint((i+1)%shape_->getPointCount()));
+		if(vector==comp)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 void Physics::update(float deltaTime)
 {
 	shape_->move(direction_.x*speed_*deltaTime, direction_.y*speed_*deltaTime);
