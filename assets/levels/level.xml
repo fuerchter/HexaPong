@@ -1,9 +1,7 @@
 <level>
 	<!-- need to be separated somehow or else there can only be 9 types -->
-	<triangle blocks="00000000000000000000021212" />
-	<triangle blocks="00000000000000000000021212" />
-	<triangle blocks="00000000000000000000021212" />
-	<triangle blocks="00000000000000000000021212" />
-	<triangle blocks="00000000000000000000021212" />
-	<triangle blocks="00000000000000000000021212" />
+	<row blocks="200020002000" />
+	<row blocks="0000000000000000" />
+	<row blocks="10002000100020001000200010002000" />
+	<row blocks="000000001000000000000000100000000000000001000000" />
 </level>

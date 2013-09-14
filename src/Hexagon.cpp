@@ -13,7 +13,13 @@ Entity(manager, EntityType::EHexagon)
 	physics_.setShape(shape);
 	
 	paddles_.resize(pointCount);
-	for(int i=0; i<pointCount; i+=2)
+	for(int i=0; i<pointCount; i++)
+	{
+		paddles_.insert(paddles_.begin()+i, shared_ptr<Paddle>());
+		//cout << "All paddles initialized to " << !!paddles_[i] << endl;
+	}
+	
+	for(int i=4; i<=pointCount; i++)
 	{
 		insertPaddle(i);
 	}
@@ -45,6 +51,7 @@ void Hexagon::rotate(float angle)
 
 void Hexagon::insertPaddle(int index)
 {
+	//cout << "Adding paddle " << index << " " << !!paddles_[index] << endl;
 	int pointCount=physics_.getShape()->getPointCount();
 	sf::Vector2u windowSize=manager_->getWindowSize();
 	if(!paddles_[index])
@@ -53,15 +60,18 @@ void Hexagon::insertPaddle(int index)
 		shared_ptr<Paddle> paddle=make_shared<Paddle>(manager_, index, outerEdge, sf::Vector2f(windowSize.x/2.0, windowSize.y/2.0), 10);
 		paddles_.insert(paddles_.begin()+index, paddle);
 		manager_->push(paddle);
-		cout << "My id: " << id_ << " paddle id: " << paddles_[index]->getId() << endl;
+		//cout << "My id: " << id_ << " paddle id: " << paddles_[index]->getId() << endl;
 	}
+	//cout << "Added paddle " << index << " " << !!paddles_[index] << endl;
 }
 
 void Hexagon::removePaddle(int index)
 {
+	//cout << "Removing paddle " << index << " " << !!paddles_[index] << endl;
 	if(paddles_[index])
 	{
 		manager_->remove(paddles_[index]->getId());
 		paddles_[index].reset();
 	}
+	//cout << "Removed paddle " << index << " " << !!paddles_[index] << endl;
 }

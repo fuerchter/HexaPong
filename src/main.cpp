@@ -9,9 +9,16 @@ int main (int argc, const char * argv[])
 {	
 	sf::ContextSettings settings;
 	//settings.antialiasingLevel=4;
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "name", sf::Style::Close, settings);
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "HexaPong", sf::Style::Close, settings);
 	
-	Level level(window.getSize(), sf::Vector2f(20, 10), sf::Vector2f(25, 25));
+	sf::Font font;
+	font.loadFromFile("assets/fonts/Hexa.ttf");
+	sf::Text text("HexaPong", font, 60);
+	sf::Text prompt("Press enter to start!", font, 30);
+	prompt.setPosition(0, 75);
+	
+	Level level(window.getSize(), sf::Vector2f(20, 10));
+	bool ingame=false;
 	
 	sf::Clock clock;
 	sf::Time previousTick=clock.getElapsedTime();
@@ -48,13 +55,36 @@ int main (int argc, const char * argv[])
 		}
 		
 		//UPDATE SECTION
-		level.update(deltaTime.asSeconds());
+		if(!ingame)
+		{
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+			{
+				level=Level(window.getSize(), sf::Vector2f(20, 10));
+				ingame=true;
+			}
+		}
+		else
+		{
+			level.update(deltaTime.asSeconds());
+			if(level.getDone())
+			{
+				ingame=false;
+			}
+		}
 		//UPDATE SECTION
 		
 		window.clear();
 		
 		//DRAW SECTION
-		level.draw(window);
+		if(!ingame)
+		{
+			window.draw(text);
+			window.draw(prompt);
+		}
+		else
+		{
+			level.draw(window);
+		}
 		//DRAW SECTION
 		
 		window.display();

@@ -1,19 +1,19 @@
 #include "Level.h"
 
-Level::Level(sf::Vector2u windowSize, sf::Vector2f blockSize, sf::Vector2f blockOffset):
-manager_(make_shared<EntityManager>(windowSize))
+Level::Level(sf::Vector2u windowSize, sf::Vector2f blockSize):
+manager_(make_shared<EntityManager>(windowSize)), done_(false)
 {
 	file<> xmlFile("assets/levels/level.xml");
 	xml_document<> doc;
 	doc.parse<0>(xmlFile.data());
 	
-	xml_node<> *triangle=doc.first_node()->first_node();
-	vector<string> triangles;
-	while(triangle)
+	xml_node<> *row=doc.first_node()->first_node();
+	vector<string> rows;
+	while(row)
 	{
-		string triangleData=triangle->first_attribute()->value();
-		triangles.push_back(triangleData);
-		triangle=triangle->next_sibling();
+		string rowData=row->first_attribute()->value();
+		rows.push_back(rowData);
+		row=row->next_sibling();
 	}
 
 	shared_ptr<LevelBorder> levelBorder=make_shared<LevelBorder>(manager_);
@@ -28,7 +28,7 @@ manager_(make_shared<EntityManager>(windowSize))
 	colCounts.push_back(16);
 	colCounts.push_back(32);
 	colCounts.push_back(48);
-	placeBlocks(windowSize, hexagonShape->getRadius(), sf::Vector2f(20, 10), colCounts);
+	placeBlocks(windowSize, hexagonShape->getRadius(), blockSize, rows);
 	
 	shared_ptr<Ball> ball=make_shared<Ball>(manager_);
 	manager_->push(ball);
@@ -102,29 +102,34 @@ int Level::oldPlaceBlocks(sf::Vector2u windowSize, sf::Vector2f blockSize, sf::V
 	return blockCount;
 }
 
-void Level::placeBlocks(sf::Vector2u windowSize, float hexagonRadius, sf::Vector2f blockSize, vector<int> colCounts)
+void Level::placeBlocks(sf::Vector2u windowSize, float hexagonRadius, sf::Vector2f blockSize, vector<string> rows)
 {
 	sf::Vector2f midScreen(windowSize.x/2.0, windowSize.y/2.0);	
 	float startDistance=hexagonRadius*3;
 	//offset between each row
-	float offsetHeight=(midScreen.y-startDistance-blockSize.y*colCounts.size())/colCounts.size();
+	float offsetHeight=(midScreen.y-startDistance-blockSize.y*rows.size())/rows.size();
 	
-	for(unsigned int y=0; y<colCounts.size(); y++)
+	for(unsigned int y=0; y<rows.size(); y++)
 	{
 		//offset between each col
-		float offsetAngle=360.0/colCounts[y];
+		float offsetAngle=360.0/rows[y].size();
 		float totalDistance=startDistance+y*offsetHeight;
 		
-		for(int x=0; x<colCounts[y]; x++)
+		for(unsigned int x=0; x<rows[y].size(); x++)
 		{
 			float finalAngle=x*offsetAngle;
 			sf::Vector2f rotatedVector=Math::rotate(sf::Vector2f(0, -1), finalAngle);
 			sf::Vector2f finalPosition(midScreen+rotatedVector*totalDistance);
 			
-			shared_ptr<Block> block=make_shared<Block>(manager_, finalPosition, finalAngle, sf::Vector2f(blockSize.x, blockSize.y));
+			shared_ptr<Block> block=make_shared<Block>(manager_, finalPosition, finalAngle, sf::Vector2f(blockSize.x, blockSize.y), (ItemType)(rows[y][x]-'0'));
 			manager_->push(block);
 		}
 	}
+}
+
+bool Level::getDone()
+{
+	return done_;
 }
 
 void Level::update(float deltaTime)
@@ -134,18 +139,17 @@ void Level::update(float deltaTime)
 		manager_->update(deltaTime);
 		if(manager_->getEntities(EntityType::EBlock).empty())
 		{
-			//cout << "You Win" << endl;
+			done_=true;
+			cout << "You Win" << endl;
 		}
 		if(manager_->getDone())
 		{
-			manager_.reset();
+			done_=true;
+			//cout << "Game Over" << endl;
 		}
 	}
-	else
-	{
-		//cout << "Game Over" << endl;
-	}
 }
+
 void Level::draw(sf::RenderWindow &window)
 {
 	if(manager_)

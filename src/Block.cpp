@@ -10,12 +10,12 @@ Entity(manager, EntityType::EBlock)
 	shape->setRotation(rotation);
 	switch(item)
 	{
-		case ItemType::IEnable:
+		/*case ItemType::IEnable:
 			shape->setFillColor(sf::Color::Green);
 			break;
 		case ItemType::IDisable:
 			shape->setFillColor(sf::Color::Red);
-			break;
+			break;*/
 		default:
 			shape->setFillColor(sf::Color(37, 165, 255));
 			break;
