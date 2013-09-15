@@ -12,8 +12,10 @@ class EntityManager;
 class Entity
 {
 public:
+	static const int ID_NOT_REGISTERED = -1;
 	Entity(shared_ptr<EntityManager> manager, EntityType type);
 	int getId();
+	void setId(int id);
 	EntityType getType();
 	Physics getPhysics();
 	virtual void update(float deltaTime)

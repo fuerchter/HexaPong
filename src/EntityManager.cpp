@@ -77,12 +77,16 @@ void EntityManager::draw(sf::RenderWindow &window)
 
 void EntityManager::push(shared_ptr<Entity> entity)
 {
+	entity->setId(size());
 	entities_.push_back(entity);
 }
 
 void EntityManager::remove(int id)
 {
-	marked_.push_back(id);
+	if(id != Entity::ID_NOT_REGISTERED)
+	{
+		marked_.push_back(id);
+	}
 }
 
 unsigned int EntityManager::size()
