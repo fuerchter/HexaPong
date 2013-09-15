@@ -43,7 +43,17 @@ float Math::dot(sf::Vector2f first, sf::Vector2f second)
 
 float Math::angle(sf::Vector2f first, sf::Vector2f second)
 {
-	return toDegree(acos(dot(first, second)));
+	float dotResult=dot(first, second);
+	if(dotResult>1.0)
+	{
+		dotResult=1.0;
+	}
+	if(dotResult<-1.0)
+	{
+		dotResult=-1.0;
+	}
+	return toDegree(acos(dotResult));
+	//return toDegree(acos(dot(first, second)));
 }
 
 sf::Vector2f Math::rotate(sf::Vector2f vector, float angle)
@@ -187,4 +197,82 @@ sf::Vector2f Math::slopeInterceptIntersection(pair<float, float> first, pair<flo
 	res.x=(second.second-first.second)/(first.first-second.first);
 	res.y=first.first*res.x+first.second;
 	return res;
+}
+
+pair<float, float> Math::segmentDistances(pair<sf::Vector2f, sf::Vector2f> segment)
+{
+	return pair<float, float>(segment.first.x-segment.second.x, segment.first.y-segment.second.y);
+}
+
+float Math::segmentAngle(pair<sf::Vector2f, sf::Vector2f> first, pair<sf::Vector2f, sf::Vector2f> second)
+{
+	pair<float, float> firstDistances=segmentDistances(first);
+	pair<float, float> secondDistances=segmentDistances(second);
+	//absolute value?
+	return firstDistances.first*secondDistances.second-firstDistances.second*secondDistances.first;
+}
+
+sf::Vector2f Math::segmentIntersection(pair<sf::Vector2f, sf::Vector2f> first, pair<sf::Vector2f, sf::Vector2f> second, float segmentAngle)
+{
+	sf::Vector2f res;
+	
+	//float denom=firstXDistance*secondYDistance-firstYDistance*secondXDistance;
+	
+	//redundance due to vector elements not accessible via [] operator
+	float firstLeftDet=first.first.x*first.second.y-first.first.y*first.second.x;
+	float secondLeftDet=second.first.x*second.second.y-second.first.y*second.second.x;
+	
+	pair<float, float> firstDistances=segmentDistances(first);
+	pair<float, float> secondDistances=segmentDistances(second);
+	
+	if(segmentAngle!=0)
+	{
+		res.x=(firstLeftDet*secondDistances.first-secondLeftDet*firstDistances.first)/segmentAngle;
+		res.y=(firstLeftDet*secondDistances.second-secondLeftDet*firstDistances.second)/segmentAngle;
+	}
+	//Test: is res on BOTH of the lines?
+	return res;
+}
+
+bool Math::isPointOnSegment(sf::Vector2f point, pair<sf::Vector2f, sf::Vector2f> segment)
+{
+	//the segment is 90°
+	if(segment.first.x==segment.second.x || segment.first.y==segment.second.y)
+	{
+		if(point==segment.first)
+		{
+			return true;
+		}
+		
+		sf::Vector2f vector=segment.second-segment.first;
+		float length=Math::length(vector);
+		vector=Math::normalize(vector);
+		
+		sf::Vector2f firstToPoint=point-segment.first;
+		float pointLength=Math::length(firstToPoint);
+		firstToPoint=Math::normalize(firstToPoint);
+		cout << "Lengths: " << pointLength << "<=" << length << " " << (pointLength<=length) << " Angle: " << Math::angle(firstToPoint, vector) << endl; 
+		cout << "vector: " << vector.x << " " << vector.y << " firstToPoint: " << firstToPoint.x << " " << firstToPoint.y << endl;
+		
+		return pointLength<=length && Math::angle(firstToPoint, vector)==0;
+	}
+	else
+	{
+		return newTCheck(pair<float, float>(computeT(segment.first.x, segment.second.x, point.x), computeT(segment.first.y, segment.second.y, point.y)));
+	}
+}
+
+float Math::computeT(float first, float second, float coordinate)
+{
+	float num=coordinate-first;
+	float denom=second-first;
+	float t=num/denom;
+	cout.precision(10);
+	cout << num << "/" << denom << "=" << t << endl;
+	return t;
+}
+
+bool Math::newTCheck(pair<float, float> t)
+{
+	return t.first==t.second && t.first>=0 && t.first<=1;
 }

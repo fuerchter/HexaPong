@@ -24,7 +24,17 @@ HexaPong
 	- combo meter
 	- decision mechanic (upgrades/currency)
 	- make levelBorder reflect towards middle
+	- boss? (shape that spins around the level and shoots bad items at you)
 	
 	- POLISH:
 		- music/sound (sound for each shape the ball hits, 8-bit/electro music?)
 		- menu (hexa font?)
+		
+	- PROTOTYPE:
+		- make ball a bit faster!!! (or varying/realistic speed, the more blocks cleared the faster?)
+		- flow area
+		- remove random paddles (time based) either via item or boss?
+		- certain powerup combinations = one super powerup
+		- local mp
+		- highlight successful powerup avoidance
+		- more precise ball aim
