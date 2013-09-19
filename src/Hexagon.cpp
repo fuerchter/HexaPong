@@ -19,7 +19,7 @@ Entity(manager, EntityType::EHexagon)
 		//cout << "All paddles initialized to " << !!paddles_[i] << endl;
 	}
 	
-	for(int i=4; i<=pointCount; i++)
+	for(int i=3; i<pointCount; i++)
 	{
 		insertPaddle(i);
 	}
@@ -58,7 +58,7 @@ void Hexagon::insertPaddle(int index)
 	{
 		pair<sf::Vector2f, sf::Vector2f> outerEdge(physics_.getGlobalPoint(index), physics_.getGlobalPoint((index+1)%pointCount));
 		shared_ptr<Paddle> paddle=make_shared<Paddle>(manager_, index, outerEdge, sf::Vector2f(windowSize.x/2.0, windowSize.y/2.0), 10);
-		paddles_.insert(paddles_.begin()+index, paddle);
+		paddles_[index] = paddle;
 		manager_->push(paddle);
 		//cout << "My id: " << id_ << " paddle id: " << paddles_[index]->getId() << endl;
 	}
