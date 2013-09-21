@@ -1,7 +1,7 @@
 #ifndef BALL
 #define BALL
 
-#include "Entity.h"
+#include "../Entity.h"
 #include "Block.h"
 
 class Ball : public Entity

@@ -3,7 +3,7 @@
 
 #include "EntityType.h"
 #include "EntityManager.h"
-#include "Physics.h"
+#include "../engine/Physics.h"
 
 #include "SFML/Graphics.hpp"
 

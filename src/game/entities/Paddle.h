@@ -6,8 +6,8 @@ using namespace std;
 
 #include "SFML/System.hpp"
 
-#include "Entity.h"
-#include "Math.h"
+#include "../Entity.h"
+#include "../../engine/Math.h"
 
 class Paddle : public Entity
 {

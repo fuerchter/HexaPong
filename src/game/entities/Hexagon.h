@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-#include "Entity.h"
+#include "../Entity.h"
 #include "Paddle.h"
 
 class Hexagon : public Entity

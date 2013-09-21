@@ -6,10 +6,10 @@
 using namespace rapidxml;
 
 #include "EntityManager.h"
-#include "LevelBorder.h"
-#include "Block.h"
-#include "Hexagon.h"
-#include "Ball.h"
+#include "entities/LevelBorder.h"
+#include "entities/Block.h"
+#include "entities/Hexagon.h"
+#include "entities/Ball.h"
 
 class Level
 {

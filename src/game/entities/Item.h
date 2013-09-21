@@ -1,8 +1,8 @@
 #ifndef ITEM
 #define ITEM
 
-#include "Entity.h"
-#include "ItemType.h"
+#include "../Entity.h"
+#include "../ItemType.h"
 #include "Hexagon.h"
 
 class Item : public Entity

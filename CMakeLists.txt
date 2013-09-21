@@ -20,7 +20,7 @@ if(SFML_FOUND)
 endif()
 
 #Folders to be searched
-set(FOLDERS "src")
+set(FOLDERS "src" "src/engine" "src/game" "src/game/entities" "src/menu")
 
 #Adding source files in each of the FOLDERS to EXECUTABLES
 foreach(FOLDER ${FOLDERS})

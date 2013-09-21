@@ -3,7 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
-#include "Level.h"
+#include "game/Level.h"
 
 int main (int argc, const char * argv[])
 {	

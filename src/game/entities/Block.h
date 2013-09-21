@@ -1,7 +1,7 @@
 #ifndef BLOCK
 #define BLOCK
 
-#include "Entity.h"
+#include "../Entity.h"
 #include "Item.h"
 
 class Block : public Entity

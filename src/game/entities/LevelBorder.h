@@ -1,7 +1,7 @@
 #ifndef LEVELBORDER
 #define LEVELBORDER
 
-#include "Entity.h"
+#include "../Entity.h"
 
 class LevelBorder : public Entity
 {
